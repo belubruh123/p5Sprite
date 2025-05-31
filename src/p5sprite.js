@@ -12,6 +12,10 @@
  * MIT License © 2025 MGB
  */
 
+let canvaX = 1280;
+let canvaY = 720;
+
+
 /* eslint-disable no-unused-vars */
 (() => {
   /* ──────────────────────────────────────────────
@@ -219,6 +223,7 @@
       this.el.style.borderRadius = '4px';
       this.el.style.background = '#fff';
       this.el.style.color = '#000';
+      this.el.style.zIndex = '10';
 
       /* safe mount: wait for <body> if needed */
       const mount = () =>
@@ -435,7 +440,7 @@
      ────────────────────────────────────────────── */
   sketchInstance = new window.p5(sk => {
     sk.setup = () => {
-      sk.createCanvas(1200, 900);
+      sk.createCanvas(canvaX, canvaY).position((sk.windowWidth - canvaX) / 2, (sk.windowHeight - canvaY) / 2).style('z-index', '0'); // lower than input box
       sk.frameRate(60);
       sk.imageMode(sk.CENTER);
       sk.textFont('sans-serif');
