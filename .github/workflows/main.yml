@@ -1,48 +1,42 @@
-name: Build p5sprite API docs
+name: Build-and-commit JSDoc
 
 on:
   push:
-    branches: [main]      # run only on pushes to main
-  workflow_dispatch:      # …or manual trigger
+    branches: [main]         # re-generate docs whenever main changes
+  workflow_dispatch:         # manual “Run workflow” button
 
 jobs:
-  build-docs:
+  build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-
     steps:
-      - name: 📥  Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 🧰  Setup Node.js
-        uses: actions/setup-node@v4
+      # 1️⃣  Checkout with full history (needed to commit back)
+      - uses: actions/checkout@v4
         with:
-          node-version: 20
+          fetch-depth: 0      # <- important
 
-      - name: 📦  Install dev-dependencies
-        # If you have a package-lock.json, keep "npm ci".  Otherwise use "npm install".
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
+      # 2️⃣  Setup Node (adjust version if you like)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: 🛠️  Generate JSDoc into ./docs
-        env:
-          TEMPLATE: node_modules/jsdoc/templates/default
+      # 3️⃣  Install dev-dependencies
+      - run: npm ci
+
+      # 4️⃣  Generate docs → temp folder
+      - name: Generate JSDoc
         run: |
-          # Ensure output dir is clean
           rm -rf docs
-          mkdir docs
-
-          # MAIN COMMAND — note the explicit template path
-          npx jsdoc src/p5sprite.js \
-            --recurse \
+          npx jsdoc src/p5sprite.js --recurse \
             --destination docs \
-            --template "$TEMPLATE"
+            --template node_modules/jsdoc/templates/default
 
-      - name: 📄  List docs/ (debug)
-        run: ls -R docs
+      # 5️⃣  Commit & push docs/ back to main
+      #     Uses EndBug/add-and-commit for a one-liner commit
+      - name: Commit docs folder
+        uses: EndBug/add-and-commit@v9
+        with:
+          branch: main
+          message: "chore(docs): auto-generate JSDoc"
+          add: "docs"
+          author_name: "github-actions[bot]"
+          author_email: "41898282+github-actions[bot]@users.noreply.github.com"
