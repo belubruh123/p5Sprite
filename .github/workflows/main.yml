@@ -2,27 +2,35 @@ name: Build-and-commit JSDoc
 
 on:
   push:
-    branches: [main]         # re-generate docs whenever main changes
-  workflow_dispatch:         # manual “Run workflow” button
+    branches: [main]           # rebuild docs on every push to main
+  workflow_dispatch:           # ⇢ manual trigger button
+
+permissions:
+  contents: write              # <-- lets the job push commits
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣  Checkout with full history (needed to commit back)
+      # 1. Checkout full history (needed to commit back)
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0      # <- important
+          fetch-depth: 0
 
-      # 2️⃣  Setup Node (adjust version if you like)
+      # 2. Node.js
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
-      # 3️⃣  Install dev-dependencies
-      - run: npm ci
+      # 3. Install deps (uses package-lock if present)
+      - run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
-      # 4️⃣  Generate docs → temp folder
+      # 4. Build docs into ./docs
       - name: Generate JSDoc
         run: |
           rm -rf docs
@@ -30,13 +38,10 @@ jobs:
             --destination docs \
             --template node_modules/jsdoc/templates/default
 
-      # 5️⃣  Commit & push docs/ back to main
-      #     Uses EndBug/add-and-commit for a one-liner commit
-      - name: Commit docs folder
+      # 5. Commit _only_ if docs changed
+      - name: Commit updated docs
         uses: EndBug/add-and-commit@v9
         with:
-          branch: main
-          message: "chore(docs): auto-generate JSDoc"
-          add: "docs"
-          author_name: "github-actions[bot]"
-          author_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          add: docs
+          message: 'chore(docs): auto-generate JSDoc'
+          default_author: github_actions
