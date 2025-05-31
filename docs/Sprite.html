@@ -30,6 +30,8 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Sprite<span class="signature">(imgPaths)</span><span class="type-signature"></span></h2>
         
+            <div class="class-description">Lightweight 2-D sprite with multiple costumes.</div>
+        
     
 </header>
 
@@ -38,6 +40,8 @@
     
         
 
+    
+    <h2>Constructor</h2>
     
 
     
@@ -97,7 +101,7 @@
 
             
 
-            <td class="description last">One or more costume URLs</td>
+            <td class="description last">One or more costume URLs (loaded via p5.loadImage)</td>
         </tr>
 
     
@@ -138,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line38">line 38</a>
+        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -194,6 +198,303 @@
     
 
     
+    <h4 class="name" id="moveTo"><span class="type-signature"></span>moveTo<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Teleport sprite instantly.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">New centre x (px)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">New centre y (px)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line82">line 82</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setScale"><span class="type-signature"></span>setScale<span class="signature">(s)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Uniformly scale sprite (affects draw size only).
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Scale factor (1 = natural)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="setSize"><span class="type-signature"></span>setSize<span class="signature">(w, h)</span><span class="type-signature"></span></h4>
     
 
@@ -202,7 +503,7 @@
 
 
 <div class="description">
-    Explicit draw size (px).
+    Set explicit draw size (bypasses <a href="Sprite.html#setScale">Sprite#setScale</a>).
 </div>
 
 
@@ -254,7 +555,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Width (px)</td>
         </tr>
 
     
@@ -277,7 +578,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Height (px)</td>
         </tr>
 
     
@@ -318,7 +619,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line72">line 72</a>
+        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line105">line 105</a>
     </li></ul></dd>
     
 
@@ -362,7 +663,7 @@
 
 
 <div class="description">
-    Move along current heading.
+    Step forward along current heading.
 </div>
 
 
@@ -414,7 +715,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Distance to move (px)</td>
         </tr>
 
     
@@ -455,7 +756,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line59">line 59</a>
+        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -499,7 +800,7 @@
 
 
 <div class="description">
-    Circle-circle collision.
+    Simple circle-circle collision test.
 </div>
 
 
@@ -551,7 +852,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Other sprite to test</td>
         </tr>
 
     
@@ -592,7 +893,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line79">line 79</a>
+        <a href="p5sprite.js.html">p5sprite.js</a>, <a href="p5sprite.js.html#line112">line 112</a>
     </li></ul></dd>
     
 
@@ -620,6 +921,10 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    **true** if hit-circles overlap
+</div>
+
 
 
 <dl>
@@ -656,13 +961,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Sprite.html">Sprite</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="pen.html">pen</a></li></ul><h3>Classes</h3><ul><li><a href="InputBox.html">InputBox</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="TextBox.html">TextBox</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Centre">Centre</a></li><li><a href="global.html#Collision">Collision</a></li><li><a href="global.html#Current">Current</a></li><li><a href="global.html#Draw-order">Draw-order</a></li><li><a href="global.html#Explicit">Explicit</a></li><li><a href="global.html#Heading">Heading</a></li><li><a href="global.html#Layer">Layer</a></li><li><a href="global.html#Loaded">Loaded</a></li><li><a href="global.html#Native">Native</a></li><li><a href="global.html#Rotation">Rotation</a></li><li><a href="global.html#Uniform">Uniform</a></li><li><a href="global.html#Visibility">Visibility</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat May 31 2025 00:42:40 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat May 31 2025 00:46:31 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
