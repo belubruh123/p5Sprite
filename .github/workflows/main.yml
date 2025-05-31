@@ -1,27 +1,29 @@
-name: Generate JSDoc
+name: Generate JSDoc to ./docs
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   jsdoc:
-    name: Build API Docs
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
 
       - name: 🧰 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🛠️ Generate docs with JSDoc
-        run: npm run docs
+      - name: 🛠️ Generate JSDoc output
+        run: npx jsdoc src/p5sprite.js -r -d temp-docs
+
+      - name: 🚚 Move to ./docs
+        run: |
+          rm -rf docs
+          mv temp-docs docs
