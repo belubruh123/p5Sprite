@@ -1,33 +1,48 @@
-name: Build JSDoc into docs/
+name: Build p5sprite API docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]      # run only on pushes to main
+  workflow_dispatch:      # …or manual trigger
 
 jobs:
-  jsdoc:
+  build-docs:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
-      - name: ⬇️  Checkout code
+      - name: 📥  Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🧰  Set up Node.js
+      - name: 🧰  Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
-      - name: 📦  Install dev dependencies
-        run: npm ci
-
-      # -- Build the docs straight from source -----------------------------
-      - name: 🛠️  Generate JSDoc
+      - name: 📦  Install dev-dependencies
+        # If you have a package-lock.json, keep "npm ci".  Otherwise use "npm install".
         run: |
-          # clean any previous build
-          rm -rf docs
-          # create fresh output
-          npx jsdoc src/p5sprite.js -r -d docs \
-            --configure jsdoc.json
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
-      #   (No deploy step here – Cloudflare Pages will simply
-      #    serve whatever is in ./docs)
+      - name: 🛠️  Generate JSDoc into ./docs
+        env:
+          TEMPLATE: node_modules/jsdoc/templates/default
+        run: |
+          # Ensure output dir is clean
+          rm -rf docs
+          mkdir docs
+
+          # MAIN COMMAND — note the explicit template path
+          npx jsdoc src/p5sprite.js \
+            --recurse \
+            --destination docs \
+            --template "$TEMPLATE"
+
+      - name: 📄  List docs/ (debug)
+        run: ls -R docs
