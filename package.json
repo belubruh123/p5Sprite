@@ -10,13 +10,14 @@
     "lint": "echo \"add eslint if you like\""
   },
   "devDependencies": {
-    "express": "^4.21.2",
-    "jsdoc": "^4.0.4"
-  },
+  "express": "^5.1.0",
+  "jsdoc": "3.6.11"
+},
   "dependencies": {
     "deps": "^1.0.0",
     "eslint": "^9.28.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3"
   }
+  
 }
