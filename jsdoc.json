@@ -1,0 +1,5 @@
+{
+  "source": { "include": ["src/p5sprite.js"] },
+  "opts":   { "destination": "./docs", "recurse": true, "template": "default" },
+  "plugins": []
+}

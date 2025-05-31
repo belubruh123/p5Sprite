@@ -1,0 +1,22 @@
+{
+  "name": "p5sprite",
+  "version": "0.0.1-beta",
+  "description": "Scratch-style helper layer for p5.js",
+  "author": "MGB",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node server.js",
+    "docs": "jsdoc -c jsdoc.json",
+    "lint": "echo \"add eslint if you like\""
+  },
+  "devDependencies": {
+    "express": "^4.21.2",
+    "jsdoc": "^4.0.4"
+  },
+  "dependencies": {
+    "deps": "^1.0.0",
+    "eslint": "^9.28.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3"
+  }
+}
