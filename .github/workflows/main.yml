@@ -1,4 +1,4 @@
-name: Generate JSDoc to ./docs
+name: Build JSDoc into docs/
 
 on:
   push:
@@ -9,21 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
+      - name: ⬇️  Checkout code
         uses: actions/checkout@v4
 
-      - name: 🧰 Setup Node.js
+      - name: 🧰  Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 📦 Install dependencies
+      - name: 📦  Install dev dependencies
         run: npm ci
 
-      - name: 🛠️ Generate JSDoc output
-        run: npx jsdoc src/p5sprite.js -r -d temp-docs
-
-      - name: 🚚 Move to ./docs
+      # -- Build the docs straight from source -----------------------------
+      - name: 🛠️  Generate JSDoc
         run: |
+          # clean any previous build
           rm -rf docs
-          mv temp-docs docs
+          # create fresh output
+          npx jsdoc src/p5sprite.js -r -d docs \
+            --configure jsdoc.json
+
+      #   (No deploy step here – Cloudflare Pages will simply
+      #    serve whatever is in ./docs)
