@@ -23,7 +23,7 @@
 
   let backdropImage = null;            // p5.Image or null
   let bgColor       = null;            // colour value or null
-  /** @type {(() => void)|null} */ let gameLoop = null;
+  /** @type {(Function|null)} */ let gameLoop = null;
   /** @type {p5} */ let sketchInstance = null;
 
   const keyState = { left:false, right:false, up:false, down:false, space:false };
